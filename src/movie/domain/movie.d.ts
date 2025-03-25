@@ -13,17 +13,20 @@ export interface Movie {
 
 export type NewMovie = Omit<Movie, '_uuid' | 'isDeleted'>
 
-export type UpdateMovie = Partial<Omit<Movie, '_uuid' | 'isDeleted'>> & { _uuid: string, isDeleted: boolean }
+export type UpdateMovie = Partial<Omit<Movie, '_uuid' | 'isDeleted'>>
+
+export type ResMovie = Omit<Movie, 'isDeleted'>
 
 export interface MovieUseCase {
   success: boolean
-  movie?: Movie
-  error?: string
+  movie: ResMovie | null | ResMovie[]
+  error: string | null
 }
 
 export interface MovieRepository {
   saveMovie: (movie: Movie) => Promise<void>
-  getMovieById: (id: string) => Promise<Movie | null>
-  updateMovie: (data: UpdateMovie) => Promise <Movie>
-  deleteMovie: (id: string) => Promise<void>
+  getMovieById: (id: string) => Promise<ResMovie | null>
+  updateMovie: (setData: UpdateMovie, id: string) => Promise <ResMovie | null>
+  deleteMovie: (id: string) => Promise<boolean>
+  getAllMovies: () => Promise<ResMovie[]>
 }

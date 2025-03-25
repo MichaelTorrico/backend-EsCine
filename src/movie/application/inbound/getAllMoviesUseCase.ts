@@ -3,11 +3,9 @@ import MovieRepository from '../outbound/firebaseMovieRepository'
 
 const movieRepository = new MovieRepository()
 
-export const getMovieByIdUseCase = async (id: string): Promise<MovieUseCase> => {
+export const getAllMoviesUseCase = async (): Promise<MovieUseCase> => {
   try {
-    const movie = await movieRepository.getMovieById(id)
-
-    if (movie === null) return { success: false, movie, error: 'movie not found' }
+    const movie = await movieRepository.getAllMovies()
 
     return { success: true, movie, error: null }
   } catch (err) {

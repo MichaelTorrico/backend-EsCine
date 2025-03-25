@@ -4,7 +4,7 @@ import { MovieController } from './movieController'
 const router = Router()
 const movieController = new MovieController()
 
-router.get('/:id', movieController.getMovieById)
+router.get('/:id', movieController.getMovie)
 router.post('/', movieController.addMovie)
 router.put('/:id', movieController.editMovie)
 router.delete('/:id', movieController.deleteMovie)

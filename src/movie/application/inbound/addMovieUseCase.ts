@@ -12,9 +12,8 @@ export const addMovieUseCase = async (data: NewMovie): Promise<MovieUseCase> => 
 
     await movieRepository.saveMovie(newMovie)
 
-    return { success: true, movie: newMovie }
+    return { success: true, movie: newMovie, error: null }
   } catch (err) {
-    console.log(err)
-    return { success: false }
+    return { success: false, movie: null, error: 'Unknown error occurred' }
   }
 }
